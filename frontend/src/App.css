@@ -1,0 +1,366 @@
+/* ========== Premium Design System ========== */
+:root {
+  /* Dynamic HSL Palette */
+  --primary: 220 90% 56%;
+  /* #3B82F6 Blue */
+  --primary-dark: 220 90% 46%;
+  /* Darker Blue */
+  --secondary: 160 84% 39%;
+  /* #10B981 Emerald */
+  --accent: 35 90% 60%;
+  /* #F59E0B Amber */
+  --danger: 0 84% 60%;
+  /* #EF4444 Red */
+
+  /* Neutrals */
+  --bg-app: 210 20% 98%;
+  /* #F9FAFB */
+  --bg-surface: 0 0% 100%;
+  /* White */
+  --text-main: 220 20% 20%;
+  /* #1F2937 */
+  --text-muted: 220 10% 45%;
+  /* #6B7280 */
+  --border-light: 220 15% 90%;
+  /* #E5E7EB */
+
+  /* Shadows & Glass */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --backdrop-blur: 12px;
+
+  /* Animation */
+  --trans-fast: 0.15s ease;
+  --trans-med: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========== Global Reset & Typography ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: hsl(var(--bg-app));
+  color: hsl(var(--text-main));
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== Layout ========== */
+.container {
+  max-width: 1200px;
+  /* Wider for grid */
+  margin: 40px auto;
+  padding: 0 20px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== Components: Cards & Glass ========== */
+.card-glass {
+  background: hsl(var(--bg-surface) / 0.8);
+  backdrop-filter: blur(var(--backdrop-blur));
+  border: 1px solid hsl(var(--border-light));
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+}
+
+/* ========== Headers ========== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 15px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+header h2 {
+  font-weight: 800;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.025em;
+}
+
+/* ========== Buttons ========== */
+button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+button.primary,
+header button,
+.task-form button:last-child {
+  background: hsl(var(--primary));
+  color: white;
+  box-shadow: 0 4px 6px -1px hsla(var(--primary) / 0.3);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  filter: brightness(110%);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button.secondary {
+  background: hsl(var(--bg-app));
+  color: hsl(var(--text-muted));
+  border: 1px solid hsl(var(--border-light));
+}
+
+button.danger {
+  background: hsla(var(--danger) / 0.1);
+  color: hsl(var(--danger));
+}
+
+button.danger:hover {
+  background: hsl(var(--danger));
+  color: white;
+}
+
+/* ========== Inputs ========== */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border-light));
+  background: hsl(var(--bg-surface));
+  transition: border-color var(--trans-fast), box-shadow var(--trans-fast);
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsla(var(--primary) / 0.2);
+}
+
+/* ========== Task Form (Note Taker) ========== */
+.task-form {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 30px;
+  border: 1px solid hsl(var(--border-light));
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.task-form h3 {
+  margin-bottom: 15px;
+  font-size: 1.25rem;
+  color: hsl(var(--text-main));
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ========== Notes Grid (Google Keep Style) ========== */
+ul {
+  list-style: none;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+li.note-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid hsl(var(--border-light));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--trans-med);
+  min-height: 180px;
+  position: relative;
+}
+
+li.note-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: hsla(var(--primary) / 0.5);
+}
+
+li.note-card.status-completed {
+  background: #f0fdf4;
+  opacity: 0.8;
+  border: 1px solid #bbf7d0;
+}
+
+.note-header {
+  margin-bottom: 10px;
+}
+
+.note-title {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: hsl(var(--text-main));
+  line-height: 1.3;
+}
+
+.note-body {
+  flex-grow: 1;
+  font-size: 0.95rem;
+  color: hsl(var(--text-muted));
+  line-height: 1.6;
+  white-space: pre-wrap;
+  margin-bottom: 15px;
+}
+
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid hsl(var(--border-light));
+}
+
+.note-date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: hsl(var(--accent));
+  background: hsla(var(--accent) / 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.note-actions {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  /* Hidden by default */
+  transition: opacity 0.2s;
+}
+
+li.note-card:hover .note-actions {
+  opacity: 1;
+  /* Show on hover */
+}
+
+.note-actions button {
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: transparent;
+  color: hsl(var(--text-muted));
+  box-shadow: none;
+}
+
+.note-actions button:hover {
+  background: hsl(var(--bg-app));
+  color: hsl(var(--primary));
+}
+
+.note-actions button.danger:hover {
+  color: hsl(var(--danger));
+  background: hsla(var(--danger) / 0.1);
+}
+
+/* ========== Filters & Stats ========== */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.stats p {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  font-weight: 500;
+  border: 1px solid hsl(var(--border-light));
+  display: flex;
+  flex-direction: column;
+}
+
+.stats p strong {
+  font-size: 1.5rem;
+  color: hsl(var(--primary));
+}
+
+/* ========== Auth Pages ========== */
+.auth-container {
+  max-width: 400px;
+  margin: 60px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.auth-container h2 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: hsl(var(--primary));
+}
+
+.error {
+  background: hsla(var(--danger) / 0.1);
+  color: hsl(var(--danger));
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin: 10px 0;
+}
+
+.auth-nav {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: hsl(var(--text-muted));
+}
